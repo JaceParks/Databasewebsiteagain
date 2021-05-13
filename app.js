@@ -5,7 +5,7 @@
 // Express
 var express = require('express');
 var app = express();
-PORT = 9188;
+PORT = 4268;
 
 // Database
 var db = require('./database/db-connector')
