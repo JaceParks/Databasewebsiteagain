@@ -1,0 +1,60 @@
+<table>
+
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            <th>Item ID</th>
+            <th>Item Name</th>
+            <th>Item Price</th>
+        </tr>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="../css/style.css" />
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+            <header>
+      <div class="bannerImage">
+        <div class="bannerText">
+          <a href="#"><h1 class="mainTitle">Grocery Shopping Database</h1></a>
+          <a href="#"><h2 class="subTitle">A log of grocery store shopping interactions among many stores</h1></a>
+        </div>
+      </div>
+
+      <nav>
+        <ul class="barList">
+          <li class="home-link"><a href="/">Home</a></li>
+          <li class="customers-link"><a href="/customers">Customers</a></li>
+          <li class="items-link"><a href="/items">Items</a></li>
+          <li class="order_details-link"><a href="/order_details">Order Information</a></li>
+          <li class="payments-link"><a href="payments">Payments</a></li>
+          <li class="stores-link"><a href="/stores">Stores</a></li>
+        </ul>
+      </nav>
+    </header>
+        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+        {{#each data}}
+        <tr>
+            <td>{{this.item_id}}</td>
+            <td>{{this.name}}</td>
+            <td>{{this.price}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<form action="/action_page.php">
+  <label for="fname">Item name:</label>
+  <input type="text" id="name" name="name"><br><br>
+  <label for="lname">Item Price:</label>
+  <input type="text" id="price" name="price"><br><br>
+  <input type="submit" value="Add Item">
+  <input type="submit" value="Delete Item">
+  <input type="submit" value="Update Item">
+</form>

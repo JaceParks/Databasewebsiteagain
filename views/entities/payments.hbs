@@ -1,0 +1,64 @@
+<table>
+
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            <th>Payment ID</th>
+            <th>Customer ID</th>
+            <th>Payment Type</th>
+            <th>Company</th>
+        </tr>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="../css/style.css" />
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+            <header>
+      <div class="bannerImage">
+        <div class="bannerText">
+          <a href="#"><h1 class="mainTitle">Grocery Shopping Database</h1></a>
+          <a href="#"><h2 class="subTitle">A log of grocery store shopping interactions among many stores</h1></a>
+        </div>
+      </div>
+
+      <nav>
+        <ul class="barList">
+          <li class="home-link"><a href="/">Home</a></li>
+          <li class="customers-link"><a href="/customers">Customers</a></li>
+          <li class="items-link"><a href="/items">Items</a></li>
+          <li class="order_details-link"><a href="/order_details">Order Information</a></li>
+          <li class="payments-link"><a href="payments">Payments</a></li>
+          <li class="stores-link"><a href="/stores">Stores</a></li>
+        </ul>
+      </nav>
+    </header>
+        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+        {{#each data}}
+        <tr>
+            <td>{{this.payment_id}}</td>
+            <td>{{this.customer_id}}</td>
+            <td>{{this.payment_type}}</td>
+            <td>{{this.company}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<form action="/action_page.php">
+  <label for="Payment type">Payment type:</label>
+  <input type="text" id="payment_type" name="payment_type"><br><br>
+  <label for="Customer ID">Customer ID:</label>
+  <input type="text" id="customer_id" name="customer_id"><br><br>
+  <label for="Company">Company:</label>
+  <input type="text" id="company" name="company"><br><br>
+  <input type="submit" value="Add Payment">
+  <input type="submit" value="Delete Payment">
+  <input type="submit" value="Update Payment">
+</form>
