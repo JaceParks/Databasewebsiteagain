@@ -1,5 +1,5 @@
 body {
-	font-family: Roboto, Helvetica, sans-serif;
+	font-family: Rockwell;
 	margin: 0;
 	background-color: grey;
 }
@@ -9,33 +9,113 @@ a
 	text-decoration: none;
 	color: white;
 }
-a:hover
-{
-	color: purple;
-}
-h1
+.subTitle
 {
 	margin-top: 0; 
-	color: white;
-	text-align: left;
+	color: black;
+	text-align: center;
 	text-decoration: underline;
+	font-weight: 900;
+}
+.mainTitle
+{
+	font-weight: 900;
+	text-align: center;
+	color: black;
 }
 h2
 {
 	margin-top: 0;
 	color: white;
 }
-li
+.barList li
 {
 	display: inline-block;
 	padding: 20px;
 }
-dl
+.barList li:hover
 {
-	padding: 20px;
-	font-size: 25px;
+	background-color: #111;
 }
-.customers-link
+.barList
 {
-	font-color: black;
+	border: solid black;
+}
+.home-link
+{
+	border-left: solid;
+}
+.stores-link
+{
+	border-right:solid;
+}
+.homePageList li
+{
+  display: block;
+  color: #000;
+  padding: 8px 16px;
+  text-decoration: none;
+  font-weight: bold;
+  background-color: #333;
+  margin: 0;
+  border-left: solid;
+}
+.homePageList li:hover
+{
+  background-color: #555;
+  color: white;
+}
+.customers-link-home
+{
+	border-color: black;
+	border-left: solid;
+	border-top: solid;
+}
+.customers-link-home:hover
+{
+	border-top: none;
+}
+
+dd
+{
+	font-size: 20px;
+	font-weight: normal;
+	background-color: grey;
+	width: 400px;
+	border-color: black;
+	border: solid;
+	padding-left: 10px;
+	padding-right: 100%;
+	margin: 0;
+}
+th
+{
+	border:solid;
+	color: black;
+}
+td
+{
+	border: solid;
+	color: black;
+}
+.barList
+{
+  list-style-type: none;
+  margin: 0;
+  overflow: hidden;
+  background-color: #333;
+  text-align: center;
+}
+.homePageList
+{
+	margin: 0;
+	text-align: left;
+}
+.customerData
+{
+	border: solid;
+}
+.active
+{
+	background-color: white;
 }

@@ -25,7 +25,6 @@
       <div class="bannerImage">
         <div class="bannerText">
           <a href="#"><h1 class="mainTitle">Grocery Shopping Database</h1></a>
-          <a href="#"><h2 class="subTitle">A log of grocery store shopping interactions among many stores</h1></a>
         </div>
       </div>
 
@@ -42,7 +41,7 @@
     </header>
         {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
         {{#each data}}
-        <tr>
+        <tr class="customerData">
             <td>{{this.customer_id}}</td>
             <td>{{this.first_name}}</td>
             <td>{{this.last_name}}</td>
@@ -53,17 +52,17 @@
     </tbody>
 </table>
 
-<form action="/action_page.php">
-  <label for="fname">First name:</label>
-  <input type="text" id="fname" name="fname"><br><br>
-  <label for="lname">Last name:</label>
-  <input type="text" id="lname" name="lname"><br><br>
-  <label for="fname">Email:</label>
+<form action="../customer.php" method="post">
+  <label for="first_name">First name:</label>
+  <input type="text" id="first_name" name="first_name"><br><br>
+  <label for="last_name">Last name:</label>
+  <input type="text" id="last_name" name="last_name"><br><br>
+  <label for="Email">Email:</label>
   <input type="text" id="email" name="email"><br><br>
-  <label for="fname">Phone Number:</label>
+  <label for="Phone Number">Phone Number:</label>
   <input type="text" id="phone_number" name="phone_number"><br><br>
-  <input type="submit" value="Add Customer">
-  <input type="submit" value="Delete Customer">
-  <input type="submit" value="Update Customer">
+  <input type="submit" name="add_customer" value="Add Customer">
+  <input type="submit" name="delete_customer" value="Delete Customer">
+  <input type="submit" name="update_customer" value="Update Customer">
 
 </form>

@@ -113,24 +113,3 @@ UNLOCK TABLES;
 
 --Creating table for orders
 
-DROP TABLE IF EXISTS `order_details`;
-CREATE TABLE `order_details` (
-  `order_detail_id` int(11) NOT NULL AUTO_INCREMENT,
-  `quanity` int(11) NOT NULL,
-  `total_price` float(10,2) NOT NULL,
-  `item_id` int(11) NOT NULL,
-  `store_id` int(11) NOT NULL,
-  `order_id` int(11) NOT NULL,
-  `payment_id` int(11) NOT NULL,
-  PRIMARY KEY (`order_detail_id`),
-  CONSTRAINT `order_details_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `items` (`item_id`),
-  CONSTRAINT `order_details_ibfk_2` FOREIGN KEY (`store_id`) REFERENCES `stores` (`store_id`),
-  CONSTRAINT `order_details_ibfk_3` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`),
-  CONSTRAINT `order_details_ibfk_4` FOREIGN KEY (`payment_id`) REFERENCES `payments` (`payment_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
-
--- loading data for `order_details`
-LOCK TABLES `order_details` WRITE;
-INSERT INTO `order_details` VALUES (1,3,500.00,1,1,1),(2,7,300.00,2,2,2);
-UNLOCK TABLES;
-
