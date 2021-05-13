@@ -92,6 +92,26 @@ LOCK TABLES `payments` WRITE;
 INSERT INTO `payments` VALUES (1,'creditcard',1,'VISA'),(2,'debtcard',2,'Master_Card');
 UNLOCK TABLES;
 
+--Creating table for orders_details
+DROP TABLE IF EXISTS `order_details`;
+CREATE TABLE `order_details` (
+  `order_details_id` int(11) NOT NULL AUTO_INCREMENT,
+  `quantity` int(11) NOT NULL,
+  `total_price` float(10,2) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `store_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  PRIMARY KEY (`order_details_id`),
+  CONSTRAINT `order_details_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `items` (`item_id`),
+  CONSTRAINT `order_details_ibfk_2` FOREIGN KEY (`store_id`) REFERENCES `stores` (`store_id`),
+  CONSTRAINT `order_details_ibfk_3` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+
+-- loading data for `order_details`
+LOCK TABLES `order_details` WRITE;
+INSERT INTO `order_details` VALUES (1,12,400.05,1,1,1),(2,25,222.22,2,2,2);
+UNLOCK TABLES;
+
 --Creating table for orders
 DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders` (
@@ -103,13 +123,11 @@ CREATE TABLE `orders` (
   PRIMARY KEY (`order_id`),
   CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`payment_id`) REFERENCES `payments` (`payment_id`),
   CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`customer_id`),
-  CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`store_id`) REFERENCES `store` (`store_id`)
+  CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`store_id`) REFERENCES `stores` (`store_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
 
 -- loading data for `items`
 LOCK TABLES `orders` WRITE;
-INSERT INTO `orders` VALUES (1,300.42,1,1,1),(2,25,2,2,2);
+INSERT INTO `orders` VALUES (1,300.42,1,1,1),(2,25.00,2,2,2);
 UNLOCK TABLES;
-
---Creating table for orders
 
