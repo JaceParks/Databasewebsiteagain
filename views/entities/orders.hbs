@@ -5,10 +5,12 @@
 
         {{!-- For just the first row, we print each key of the row object as a header cell so we
         know what each column means when the page renders --}}
-        <tr>
-            <th>Item ID</th>
-            <th>Item Name</th>
-            <th>Item Price</th>
+        <tr>  
+            <th>Order ID</th>
+            <th>Total Price</th>
+            <th>Payment ID</th>
+            <th>Custmomer ID</th>
+            <th>Store ID</th>
         </tr>
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700" rel="stylesheet">
 
@@ -41,21 +43,30 @@
         {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
         {{#each data}}
         <tr>
-            <td>{{this.item_id}}</td>
-            <td>{{this.name}}</td>
-            <td>{{this.price}}</td>
+            <td>{{this.order_id}}</td>
+            <td>{{this.total_price}}</td>
+            <td>{{this.payment_id}}</td>
+            <td>{{this.customer_id}}</td>
+            <td>{{this.store_id}}</td>
         </tr>
         {{/each}}
     </tbody>
 </table>
 
 <form action="/action_page.php">
-  <label for="fname">Item name:</label>
-  <input type="text" id="name" name="name"><br><br>
-  <label for="lname">Item Price:</label>
-  <input type="text" id="price" name="price"><br><br>
-  <input type="submit" value="Add Item">
-  <input type="submit" value="Delete Item">
-  <input type="submit" value="Update Item">
-  <input type="submit" value="Search Item">
+  <label for="Quantity">Quantity:</label>
+  <input type="text" id="quantity" name="quantity"><br><br>
+  <label for="Total">Total:</label>
+  <input type="text" id="total_price" name="total_price"><br><br>
+  <label for="Item ID">Item ID:</label>
+  <input type="text" id="item_id" name="item_id"><br><br>
+  <label for="Store ID">Store ID:</label>
+  <input type="text" id="store_id" name="store_id"><br><br>
+  <label for="Order ID">Order ID:</label>
+  <input type="text" id="order_id" name="order_id"><br><br>
+  <label for="Payment ID">Payment ID:</label>
+  <input type="text" id="payment_id" name="payment_id"><br><br>
+  <input type="submit" value="Add Order">
+  <input type="submit" value="Delete Order">
+  <input type="submit" value="Update Order">
 </form>

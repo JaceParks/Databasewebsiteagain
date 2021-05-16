@@ -72,7 +72,7 @@ app.get('/', function(req, res)
 
             res.render('entities/payments', {data: rows});                  // Render the index.hbs file, and also send the renderer
         })                                                      // an object where 'data' is equal to the 'rows' we
-    });                                                         // received back from the query 
+    });    
 
     app.get('/order_details', function(req, res)
     {
@@ -82,7 +82,20 @@ app.get('/', function(req, res)
 
             res.render('entities/order_details', {data: rows});                  // Render the index.hbs file, and also send the renderer
         })                                                      // an object where 'data' is equal to the 'rows' we
-    });                                                         // received back from the query 
+    });
+    
+    app.get('/orders', function(req, res)
+    {
+        let query2 = "SELECT * FROM orders;";               // Define our query
+
+        db.pool.query(query2, function(error, rows, fields){    // Execute the query
+
+            res.render('entities/orders', {data: rows});                  // Render the index.hbs file, and also send the renderer
+        })                                                      // an object where 'data' is equal to the 'rows' we
+    }); 
+    
+
+                                                            // received back from the query 
     
 
     

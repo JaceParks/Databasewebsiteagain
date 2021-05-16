@@ -7,11 +7,11 @@
         know what each column means when the page renders --}}
         <tr>  
             <th>Order Detail ID</th>
+            <th>Quanity</th>
             <th>Total Price</th>
             <th>Item ID</th>
             <th>Store ID</th>
             <th>Order ID</th>
-            <th>Payment ID</th>
         </tr>
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700" rel="stylesheet">
 
@@ -35,6 +35,7 @@
           <li class="customers-link"><a href="/customers">Customers</a></li>
           <li class="items-link"><a href="/items">Items</a></li>
           <li class="order_details-link"><a href="/order_details">Order Information</a></li>
+          <li class="orders-link"><a href="/orders">Orders</a></li>
           <li class="payments-link"><a href="payments">Payments</a></li>
           <li class="stores-link"><a href="/stores">Stores</a></li>
         </ul>
@@ -43,13 +44,12 @@
         {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
         {{#each data}}
         <tr>
-            <td>{{this.order_detail_id}}</td>
+            <td>{{this.order_details_id}}</td>
             <td>{{this.quantity}}</td>
             <td>{{this.total_price}}</td>
             <td>{{this.item_id}}</td>
             <td>{{this.store_id}}</td>
             <td>{{this.order_id}}</td>
-            <td>{{this.payment_id}}</td>
         </tr>
         {{/each}}
     </tbody>
@@ -71,4 +71,5 @@
   <input type="submit" value="Add Order">
   <input type="submit" value="Delete Order">
   <input type="submit" value="Update Order">
+  <input type="submit" value="Search Order">
 </form>
