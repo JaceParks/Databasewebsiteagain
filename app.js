@@ -93,7 +93,13 @@ app.get('/', function(req, res)
             res.render('entities/orders', {data: rows});                  // Render the index.hbs file, and also send the renderer
         })                                                      // an object where 'data' is equal to the 'rows' we
     }); 
-    
+    app.post('/customers', function(req, res)
+    {
+    	var sql = `INSERT INTO customers VALUES (${req.body.first_name}, ${req.body.last_name}, ${req.body.email}, ${req.body.phone_number})`;
+    	db.pool.query(sql, function(error, rows, fields){
+
+    		res.render('entities/customers', {data: rows});
+    })
 
                                                             // received back from the query 
     
