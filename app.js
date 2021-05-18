@@ -99,14 +99,10 @@ app.get('/', function(req, res)
     	db.pool.query(sql, function(error, rows, fields){
 
     		res.render('entities/customers', {data: rows});
-    })
-
-                                                            // received back from the query 
-    
-
-    
-                       
-
+    });
+});
+                                                      // received back from the query 
+               
 /*
     LISTENER
 */
