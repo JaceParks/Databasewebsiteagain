@@ -95,6 +95,7 @@ app.get('/', function(req, res)
     }); 
     app.post('/customers', function(req, res)
     {
+    	console.log(req.body);
     	var sql = `INSERT INTO customers VALUES (${req.body.first_name}, ${req.body.last_name}, ${req.body.email}, ${req.body.phone_number})`;
     	db.pool.query(sql, function(error, rows, fields){
 
