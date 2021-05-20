@@ -9,7 +9,7 @@
             <th>Order ID</th>
             <th>Total Price</th>
             <th>Payment ID</th>
-            <th>Custmomer ID</th>
+            <th>Customer ID</th>
             <th>Store ID</th>
         </tr>
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700" rel="stylesheet">
@@ -53,20 +53,20 @@
     </tbody>
 </table>
 
-<form action="/action_page.php">
-  <label for="Quantity">Quantity:</label>
-  <input type="text" id="quantity" name="quantity"><br><br>
+<form action="/orders" method="post">
   <label for="Total">Total:</label>
   <input type="text" id="total_price" name="total_price"><br><br>
-  <label for="Item ID">Item ID:</label>
-  <input type="text" id="item_id" name="item_id"><br><br>
-  <label for="Store ID">Store ID:</label>
-  <input type="text" id="store_id" name="store_id"><br><br>
-  <label for="Order ID">Order ID:</label>
-  <input type="text" id="order_id" name="order_id"><br><br>
   <label for="Payment ID">Payment ID:</label>
   <input type="text" id="payment_id" name="payment_id"><br><br>
-  <input type="submit" value="Add Order">
-  <input type="submit" value="Delete Order">
-  <input type="submit" value="Update Order">
+  <label for="Customer ID">Customer ID:</label>
+  <input type="text" id="customer_id" name="customer_id"><br><br>
+  <label for="Store ID">Store ID:</label>
+  <input type="text" id="store_id" name="store_id"><br><br>
+  <label for="Keyword">Search order by ID:</label>
+  <input type="text" id="keyword" name="keyword"><br><br>
+  <input type="submit" name="add_order" value="Add Order">
+  <input type="submit" name="delete_order" value="Delete Order">
+  <input type="submit" name="update_order" value="Update Order">
+  <input type="submit" name="search_order" value="Search Order by ID">
+  <input type="submit" name="display_all" value="Display All">
 </form>

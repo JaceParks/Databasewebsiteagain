@@ -49,13 +49,16 @@
     </tbody>
 </table>
 
-<form action="/action_page.php">
-  <label for="fname">Item name:</label>
+<form action="/items", method="post">
+  <label for="Item name">Item name:</label>
   <input type="text" id="name" name="name"><br><br>
-  <label for="lname">Item Price:</label>
+  <label for="Item price">Item Price:</label>
   <input type="text" id="price" name="price"><br><br>
-  <input type="submit" value="Add Item">
-  <input type="submit" value="Delete Item">
-  <input type="submit" value="Update Item">
-  <input type="submit" value="Search Item">
+  <label for="Keyword">Search item by name:</label>
+  <input type="text" id="keyword" name="keyword"><br><br>
+  <input type="submit" name="add_item" value="Add Item">
+  <input type="submit" name="delete_item" value="Delete Item">
+  <input type="submit" name="update_item" value="Update Item">
+  <input type="submit" name="search_item" value="Search Item by Name">
+  <input type="submit" name="display_all" value="Display All">
 </form>

@@ -51,14 +51,18 @@
     </tbody>
 </table>
 
-<form action="/action_page.php">
+<form action="/payments" method="post">
   <label for="Payment type">Payment type:</label>
   <input type="text" id="payment_type" name="payment_type"><br><br>
   <label for="Customer ID">Customer ID:</label>
   <input type="text" id="customer_id" name="customer_id"><br><br>
   <label for="Company">Company:</label>
   <input type="text" id="company" name="company"><br><br>
-  <input type="submit" value="Add Payment">
-  <input type="submit" value="Delete Payment">
-  <input type="submit" value="Update Payment">
+  <label for="Keyword">Search payment by ID:</label>
+  <input type="text" id="keyword" name="keyword"><br><br>
+  <input type="submit" name="add_payment" value="Add Payment">
+  <input type="submit" name="delete_payment" value="Delete Payment">
+  <input type="submit" name=" update_payment" value="Update Payment">
+  <input type="submit" name="search_payment" value="Search Payment by ID">
+  <input type="submit" name="display_all" value="Display All">
 </form>

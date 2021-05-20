@@ -55,7 +55,7 @@
     </tbody>
 </table>
 
-<form action="/action_page.php">
+<form action="/stores" method="post">
   <label for="State">State:</label>
   <input type="text" id="state" name="state"><br><br>
   <label for="City">City:</label>
@@ -66,7 +66,11 @@
   <input type="text" id="street" name="street"><br><br>
   <label for="Address Number">Address Number:</label>
   <input type="text" id="address_number" name="address_number"><br><br>
-  <input type="submit" value="Add Store">
-  <input type="submit" value="Delete Store">
-  <input type="submit" value="Update Store">
+  <label for="Keyword">Search store by ID:</label>
+  <input type="text" id="keyword" name="keyword"><br><br>
+  <input type="submit" name="add_store" value="Add Store">
+  <input type="submit" name="delete_store" value="Delete Store">
+  <input type="submit" name="update_store" value="Update Store">
+  <input type="submit" name="search_store" value="Search Store by ID">
+  <input type="submit" name="display_all" value="Display All">
 </form>

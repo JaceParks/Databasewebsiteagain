@@ -55,7 +55,7 @@
     </tbody>
 </table>
 
-<form action="/action_page.php">
+<form action="/order_details" method="post">
   <label for="Quantity">Quantity:</label>
   <input type="text" id="quantity" name="quantity"><br><br>
   <label for="Total">Total:</label>
@@ -66,10 +66,11 @@
   <input type="text" id="store_id" name="store_id"><br><br>
   <label for="Order ID">Order ID:</label>
   <input type="text" id="order_id" name="order_id"><br><br>
-  <label for="Payment ID">Payment ID:</label>
-  <input type="text" id="payment_id" name="payment_id"><br><br>
-  <input type="submit" value="Add Order">
-  <input type="submit" value="Delete Order">
-  <input type="submit" value="Update Order">
-  <input type="submit" value="Search Order">
+  <label for="Keyword">Search order details by ID:</label>
+  <input type="text" id="keyword" name="keyword"><br><br>
+  <input type="submit" name="add_order_details" value="Add Order">
+  <input type="submit" name="delete_order_details" value="Delete Order">
+  <input type="submit" name="update_order_details" value="Update Order">
+  <input type="submit" name="search_order_details" value="Search Order Details by ID">
+  <input type="submit" name="display_all" value="Display All">
 </form>
