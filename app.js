@@ -131,6 +131,29 @@ app.get('/', function(req, res)
 	 res.render('entities/customers', {data: rows});
 	})	
     }
+    else if(req.body.delete_customer != undefined)
+    {
+    var name = req.body.keyword;
+  	let query1 = "DELETE FROM customers WHERE customer_id = ?";
+  	let query2 = "DELETE FROM orders WHERE customer_id = ?";
+  	let query3 = "DELETE FROM payments WHERE customer_id = ?"
+ 	db.pool.query(query1, name, function(error, rows, fields){
+	db.pool.query(query2, name, function(error, rows, fields){
+	db.pool.query(query3, name, function(error, rows, fields){
+		if(error)
+		{
+			console.log(error);
+		}
+ 	let query4 = "SELECT * FROM customers;";
+ 	db.pool.query(query4, function(error, rows, fields){
+ 
+	 res.render('entities/customers', {data: rows});
+
+ 	});
+	});
+	});
+	});	
+    }
 	});
 
 		app.post('/items', function(req, res)
