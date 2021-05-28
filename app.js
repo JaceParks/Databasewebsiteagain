@@ -125,6 +125,46 @@
 				});
 			});
 		} 
+		else if(req.body.update_customer != undefined)
+		{
+			var sql = `UPDATE customers SET first_name = ?, last_name = ?, email = ?, phone_number = ? WHERE customer_id = ?`
+			var values = [req.body.first_name, req.body.last_name, req.body.email, req.body.phone_number, req.body.customer_id]
+
+			console.log(values);
+
+			db.pool.query(sql, values, function(error, rows, fields)
+			{
+				if (error)
+				{
+					console.log(error)
+				}
+
+				let query2 = "SELECT * FROM customers;";
+				db.pool.query(query2, function(error, rows, fields)
+				{
+					res.render('entities/customers', {data: rows});
+				});
+			});
+		}
+		else if(req.body.delete_customer != undefined)
+		{
+			var sql = `DELETE FROM customers WHERE customer_id = ?`
+			var values = req.body.customer_id
+
+			db.pool.query(sql, values, function(error, rows, fields)
+			{
+				if (error)
+				{
+					console.log(error)
+				}
+
+				let query2 = "SELECT * FROM customers;";
+				db.pool.query(query2, function(error, rows, fields)
+				{
+					res.render('entities/customers', {data: rows});
+				});
+			});
+		}
 		else if(req.body.search_customer != undefined)
 		{
 			var keyword = req.body.keyword;
@@ -193,6 +233,48 @@
 				});
  			});
  		}
+		else if(req.body.update_item != undefined)
+		{
+			var sql = `UPDATE items set name = ?, price = ? WHERE item_id = ?`
+			var values = [req.body.name, req.body.price, req.body.item_id]
+
+			
+			values[1] = parseFloat(req.body.price);
+			values[2] = parseInt(req.body.item_id);
+ 
+			db.pool.query(sql, values, function(error, rows, fields)
+			{
+				if (error)
+				{
+					console.log(error)
+				}
+ 
+				let query2 = "SELECT * FROM items;";
+				db.pool.query(query2, function(error, rows, fields)
+				{
+					res.render('entities/items', {data: rows});
+				});
+			});
+		}
+		else if(req.body.delete_item != undefined)
+		{
+			var sql = `DELETE FROM items WHERE item_id = ?`
+			var values = req.body.item_id
+ 
+			db.pool.query(sql, values, function(error, rows, fields)
+			{
+				if (error)
+				{
+					console.log(error)
+				}
+ 
+				let query2 = "SELECT * FROM items;";
+				db.pool.query(query2, function(error, rows, fields)
+				{
+					res.render('entities/items', {data: rows});
+				});
+			});
+		}
  		else if(req.body.search_item != undefined)
  		{
  			var keyword = req.body.keyword;
@@ -234,14 +316,40 @@
 				});
  			});
  		}
- 		else if(req.body.search_order_details != undefined)
- 		{
-    		var keyword = req.body.keyword;
- 			let query2 = "SELECT * FROM order_details WHERE order_details_id = ?";
+		else if(req.body.update_order_details != undefined)
+		{
+ 			var sql = `UPDATE order_details SET quantity = ?, total_price = ?, item_id = ?, store_id = ?, order_id = ?  WHERE order_details_id = ?`
+ 			var values = [req.body.quantity, req.body.total_price, req.body.item_id, req.body.store_id, req.body.order_id, req.body.order_details_id]
 
- 			db.pool.query(query2, keyword, function(keyword, rows, fields)
+ 			db.pool.query(sql, values, function(error, rows, fields)
 			{
- 				res.render('entities/order_details', {data: rows});
+				if (error){
+					console.log(error)
+				}
+
+				let query2 = "SELECT * FROM order_details;";
+				db.pool.query(query2, function(error, rows, fields)
+				{
+					res.render('entities/order_details', {data: rows});
+				});
+ 			});
+ 		}
+ 		else if(req.body.delete_order_details != undefined)
+ 		{
+ 			let sql = "DELETE FROM order_details WHERE order_details_id = ?";
+			var values = req.body.order_details_id;
+
+			db.pool.query(sql, values, function(error, rows, fields)
+			{
+				if (error){
+					console.log(error)
+				}
+
+				let query2 = "SELECT * FROM order_details;";
+				db.pool.query(query2, function(error, rows, fields)
+				{
+					res.render('entities/order_details', {data: rows});
+				});
  			});
  		}
  	    else if(req.body.display_all != undefined)
@@ -276,10 +384,30 @@
 				});
  			});
  		}
- 		else if(req.body.search_order != undefined)
+		else if(req.body.update_order != undefined)
+		{
+			var sql = `UPDATE orders SET total_price = ?, payment_id = ?, customer_id = ?, store_id = ? WHERE order_id = ?`
+			var values = [req.body.total_price, req.body.payment_id, req.body.customer_id, req.body.store_id, req.body.order_id]
+ 
+	       	db.pool.query(sql, values, function(error, rows, fields)
+			{
+				if (error)
+				{
+					console.log(error)
+				}
+ 
+				let query2 = "SELECT * FROM orders;";
+				db.pool.query(query2, function(error, rows, fields)
+				{
+					res.render('entities/orders', {data: rows});
+				});
+			 });
+		}
+ 		else if(req.body.delete_order != undefined)
  		{
- 			var keyword = req.body.keyword;
- 			let query2 = "SELECT * FROM order_details WHERE order_id = ?";
+ 			let query2 = "DELETE FROM orders WHERE order_id = ?";
+			var keyword = req.body.order_id;
+
 
  			db.pool.query(query2, keyword, function(keyword, rows, fields)
 			{
@@ -317,6 +445,42 @@
 				});
  			});
  		}
+		else if(req.body.update_payment != undefined){
+			var sql = `UPDATE payments SET payment_type = ?, customer_id = ?, company = ? WHERE payment_id = ?`
+			var values = [req.body.payment_type, req.body.customer_id, req.body.company, req.body.payment_id]
+
+			db.pool.query(sql, values, function(error, rows, fields)
+		    {
+			   if (error)
+			   {
+				   console.log(error)
+			   }
+
+			   let query2 = "SELECT * FROM payments;";
+			   db.pool.query(query2, function(error, rows, fields)
+			   {
+				   res.render('entities/payments', {data: rows});
+			   });
+			});
+		}
+		else if(req.body.delete_payment != undefined){
+			var sql = `DELETE FROM payments WHERE payment_id = ?`
+			var values = parseInt(req.body.payment_id)
+
+			db.pool.query(sql, values, function(error, rows, fields)
+		   {
+			   if (error)
+			   {
+				   console.log(error)
+			   }
+
+			   let query2 = "SELECT * FROM payments;";
+			   db.pool.query(query2, function(error, rows, fields)
+			   {
+				   res.render('entities/payments', {data: rows});
+			   });
+			});
+		}
  	 	else if(req.body.search_payment != undefined)
  		{
  			var keyword = req.body.keyword;
@@ -357,6 +521,46 @@
  				});
  			});
  		}
+ 		else if(req.body.update_store != undefined)
+		{
+ 
+			var sql = `UPDATE stores SET state = ?, city = ?, zip_code = ?, street = ?, address_number = ? WHERE  store_id = ?`
+			var values = [req.body.state, req.body.city, req.body.zip_code, req.body.street, req.body.address_number, req.body.store_id]
+ 
+			db.pool.query(sql, values, function(error, rows, fields)
+			{
+				if (error)
+				{
+					console.log(error)
+				}
+ 
+				let query2 = "SELECT * FROM stores;";
+				db.pool.query(query2, function(error, rows, fields)
+				{
+					res.render('entities/stores', {data: rows});
+				});
+			});
+		}
+		else if(req.body.delete_store != undefined)
+		{
+			console.log(typeof(req.body.store_id))
+			var sql = `DELETE FROM stores WHERE store_id = ?`
+			var values = parseInt(req.body.store_id)
+ 
+			db.pool.query(sql, values, function(error, rows, fields)
+			{
+				if (error)
+				{
+					console.log(error)
+				}
+ 
+				let query2 = "SELECT * FROM stores;";
+				db.pool.query(query2, function(error, rows, fields)
+				{ 
+					res.render('entities/stores', {data: rows});
+				});
+			});
+		}
  		else if(req.body.search_store != undefined)
  		{
  			var keyword = req.body.keyword;
