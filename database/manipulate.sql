@@ -31,3 +31,64 @@ UPDATE payments SET paymemt_type = :new_payment_type, customer_id = :new_custome
 
 UPDATE order_details SET quanity = :new_quanity, total_price = :new_total_price, item_id = :new_item_id, store_id = store_new_id,  
 order_id = new_order_id WHERE id = wanted_id;
+-----------------------------------------------------------------------------------------------------------------------------------------------
+--DRAFT QUERIES--------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------
+--ACRTUAL QUERIES------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------
+SELECT * FROM bsg_people;
+SELECT * FROM customers;
+SELECT * FROM items;
+SELECT * FROM stores;
+SELECT * FROM payments;
+SELECT * FROM order_details;
+SELECT * FROM orders;
+
+
+--customer queries---------------------------------------------------------------------------------------------
+INSERT INTO customers (first_name, last_name, email, phone_number) VALUES (?,?,?,?);
+UPDATE customers SET first_name = ?, last_name = ?, email = ?, phone_number = ? WHERE customer_id = ?;
+DELETE FROM order_details WHERE order_id = (SELECT order_id FROM orders WHERE customer_id = ?);
+DELETE FROM payments WHERE customer_id = ?;
+DELETE FROM orders WHERE customer_id = ?;
+DELETE FROM customers WHERE customer_id = ?;
+SELECT * FROM customers WHERE first_name = ?;
+DELETE FROM customers WHERE customer_id = ?;
+DELETE FROM orders WHERE customer_id = ?;
+DELETE FROM payments WHERE customer_id = ?;
+
+ --item queries------------------------------------------------------------------------------------------------
+ INSERT INTO items (name, price) VALUES (?,?);
+ UPDATE items set name = ?, price = ? WHERE item_id = ?;
+ DELETE FROM order_details WHERE item_id = ?;
+ DELETE FROM items WHERE item_id = ?;
+ SELECT * FROM items WHERE name = ?;
+
+ --order_details queries-----------------------------------------------------------------------------------------------
+ INSERT INTO order_details (quantity, total_price, item_id, store_id, order_id) VALUES (?,?,?,?,?);
+ UPDATE order_details SET quantity = ?, total_price = ?, item_id = ?, store_id = ?, order_id = ?  WHERE order_details_id = ?;
+ DELETE FROM order_details WHERE order_details_id = ?;
+ SELECT * FROM order_details WHERE order_details_id = ?;
+
+ --order queries------------------------------------------------------------------------------------------------
+ INSERT INTO orders (total_price, payment_id, customer_id, store_id) VALUES (?,?,?,?);
+ UPDATE orders SET total_price = ?, payment_id = ?, customer_id = ?, store_id = ? WHERE order_id = ?;
+ SELECT * FROM orders WHERE order_id = ?;
+ DELETE FROM order_details WHERE order_id = ?;
+ DELETE FROM orders WHERE order_id = ?;
+
+ --payment queries----------------------------------------------------------------------------------------------
+ INSERT INTO payments (payment_type, customer_id, company) VALUES (?,?,?);
+ UPDATE payments SET payment_type = ?, customer_id = ?, company = ? WHERE payment_id = ?;
+ DELETE FROM order_details WHERE order_id = (SELECT order_id FROM orders WHERE payment_id = ?);
+ DELETE FROM orders WHERE payment_id = ?;
+ DELETE FROM payments WHERE payment_id = ?
+ SELECT * FROM payments WHERE payment_id = ?
+
+ --stores queries------------------------------------------------------------------------------------------------
+INSERT INTO stores (state, city, zip_code, street, address_number) VALUES (?,?,?,?,?);
+UPDATE stores SET state = ?, city = ?, zip_code = ?, street = ?, address_number = ? WHERE  store_id = ?;
+DELETE FROM order_details WHERE order_id = (SELECT order_id FROM orders WHERE store_id = ?);
+DELETE FROM orders WHERE store_id = ?;
+DELETE FROM stores WHERE store_id = ?;
+SELECT * FROM stores WHERE store_id = ?

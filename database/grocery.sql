@@ -32,10 +32,8 @@ CREATE TABLE `customers` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
--- loading data for `customer`
-LOCK TABLES `customers` WRITE;
 /*!40000 ALTER TABLE `customers` DISABLE KEYS */;
-INSERT INTO `customers` VALUES (1,'Jace','Parks','parkjace@oregonstate.edu',5037506380),(2,'Zach','Baker','bakerzac@oregonstate.edu',9712410768);
+INSERT INTO `customers` VALUES (1,'Jace','Parks','parkjace@oregonstate.edu',5037506380),(2,'Zach','Baker','bakerzac@oregonstate.edu',9712410768),(3,'Howard','Knutz','HK@oregonstate.edu',8083141592);
 /*!40000 ALTER TABLE `customers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -54,7 +52,7 @@ CREATE TABLE `items` (
 
 -- loading data for `items`
 LOCK TABLES `items` WRITE;
-INSERT INTO `items` VALUES (1,'milk',2.69),(2,'chedder_cheese',6.75);
+INSERT INTO `items` VALUES (1,'milk',2.69),(2,'chedder_cheese',6.75),(3,'wagu_beef',90.11);
 UNLOCK TABLES;
 
 --Creating table for stores
@@ -72,7 +70,7 @@ CREATE TABLE `stores` (
 
 -- loading data for `stores`
 LOCK TABLES `stores` WRITE;
-INSERT INTO `stores` VALUES (1,'Oregon','Corvallis',97330,'Wallup_Street',1238),(2,'Oregon','Sherwood',97140,'Brownsauce_lane',666);
+INSERT INTO `stores` VALUES (1,'Oregon','Corvallis',97330,'Wallup_Street',1238),(2,'Oregon','Sherwood',97140,'Brownsauce_lane',666),(3,'California','Hanford',93230,'Aspin_street',1238);
 UNLOCK TABLES;
 
 --Creating table for payments
@@ -81,7 +79,7 @@ DROP TABLE IF EXISTS `payments`;
 CREATE TABLE `payments` (
   `payment_id` int(11) NOT NULL AUTO_INCREMENT,
   `payment_type` varchar(255) NOT NULL,
-  `customer_id` int(11) NOT NULL,
+  `customer_id` int(11),
   `company` varchar(255) NOT NULL,
   PRIMARY KEY (`payment_id`),
   CONSTRAINT `payments_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`customer_id`)
@@ -89,7 +87,7 @@ CREATE TABLE `payments` (
 
 -- loading data for `items`
 LOCK TABLES `payments` WRITE;
-INSERT INTO `payments` VALUES (1,'creditcard',1,'VISA'),(2,'debtcard',2,'Master_Card');
+INSERT INTO `payments` VALUES (1,'creditcard',1,'VISA'),(2,'debtcard',2,'Master_Card'),(3,'cash',3,'U.S.A');
 UNLOCK TABLES;
 
 --Creating table for orders_details
@@ -98,9 +96,9 @@ CREATE TABLE `order_details` (
   `order_details_id` int(11) NOT NULL AUTO_INCREMENT,
   `quantity` int(11) NOT NULL,
   `total_price` float(10,2) NOT NULL,
-  `item_id` int(11) NOT NULL,
-  `store_id` int(11) NOT NULL,
-  `order_id` int(11) NOT NULL,
+  `item_id` int(11),
+  `store_id` int(11),
+  `order_id` int(11),
   PRIMARY KEY (`order_details_id`),
   CONSTRAINT `order_details_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `items` (`item_id`),
   CONSTRAINT `order_details_ibfk_2` FOREIGN KEY (`store_id`) REFERENCES `stores` (`store_id`),
@@ -109,7 +107,7 @@ CREATE TABLE `order_details` (
 
 -- loading data for `order_details`
 LOCK TABLES `order_details` WRITE;
-INSERT INTO `order_details` VALUES (1,12,400.05,1,1,1),(2,25,222.22,2,2,2);
+INSERT INTO `order_details` VALUES (1,12,400.05,1,1,1),(2,25,222.22,2,2,2),(3,66,1174.40,3,3,3);
 UNLOCK TABLES;
 
 --Creating table for orders
@@ -117,9 +115,9 @@ DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders` (
   `order_id` int(11) NOT NULL AUTO_INCREMENT,
   `total_price` float(10,2) NOT NULL,
-  `payment_id` int(11) NOT NULL,
-  `customer_id` int(11) NOT NULL,
-  `store_id` int(11) NOT NULL,
+  `payment_id` int(11),
+  `customer_id` int(11),
+  `store_id` int(11),
   PRIMARY KEY (`order_id`),
   CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`payment_id`) REFERENCES `payments` (`payment_id`),
   CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`customer_id`),
@@ -128,6 +126,6 @@ CREATE TABLE `orders` (
 
 -- loading data for `items`
 LOCK TABLES `orders` WRITE;
-INSERT INTO `orders` VALUES (1,300.42,1,1,1),(2,25.00,2,2,2);
+INSERT INTO `orders` VALUES (1,300.42,1,1,1),(2,25.00,2,2,2),(3,60.00,3,3,3);
 UNLOCK TABLES;
 
