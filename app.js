@@ -5,7 +5,7 @@
 	// Express
 	var express = require('express');
 	var app = express();
-	PORT = 4240;
+	PORT = 4266;
 
 	// Database
 	var db = require('./database/db-connector')
@@ -258,6 +258,24 @@
 		}
 		else if(req.body.delete_item != undefined)
 		{
+			//if you delete item you must delete all dependent order details
+			var sql = `DELETE FROM order_details WHERE item_id = ?`
+			var values = req.body.item_id
+ 
+			db.pool.query(sql, values, function(error, rows, fields)
+			{
+				if (error)
+				{
+					console.log(error)
+				}
+
+				let query2 = "SELECT * FROM items;";
+				db.pool.query(query2, function(error, rows, fields)
+				{
+					res.render('entities/items', {data: rows});
+				});
+			});
+
 			var sql = `DELETE FROM items WHERE item_id = ?`
 			var values = req.body.item_id
  
@@ -267,7 +285,7 @@
 				{
 					console.log(error)
 				}
- 
+
 				let query2 = "SELECT * FROM items;";
 				db.pool.query(query2, function(error, rows, fields)
 				{
@@ -299,7 +317,7 @@
 	{
  		if(req.body.add_order_details != undefined)
 		{
- 			var sql = `INSERT INTO order_details (quantity, total_price, item_id, store_id, order_id) VALUES (?,?,?,?,?)`
+ 			var sql = `INSERT INTO order_details (quantity, total_price, item_id, store_id, order_id) VALUES (?,?,?,?,?);`
  			var values = [req.body.quantity, req.body.total_price, req.body.item_id, req.body.store_id, req.body.order_id]
 
  			db.pool.query(sql, values, function(error, rows, fields)
@@ -336,6 +354,8 @@
  		}
  		else if(req.body.delete_order_details != undefined)
  		{
+
+			
  			let sql = "DELETE FROM order_details WHERE order_details_id = ?";
 			var values = req.body.order_details_id;
 
@@ -374,7 +394,7 @@
 			{
 				if (error)
 				{
-					console.log(error)
+					console.log(error);
 				}
 
 				let query2 = "SELECT * FROM orders;";
@@ -405,13 +425,44 @@
 		}
  		else if(req.body.delete_order != undefined)
  		{
+			// Delete all order details associated
+
+			let query1 = "DELETE FROM order_details WHERE order_id = ?";
+			var keyword = req.body.order_id;
+
+
+ 			db.pool.query(query1, keyword, function(error, rows, fields)
+			{
+				if (error)
+				{
+					console.log(error);
+				}
+
+				let query3 = "SELECT * FROM order_details;";
+				db.pool.query(query3, function(error, rows, fields)
+				{
+					res.render('entities/order_details', {data: rows});
+				});
+ 			});
+
+			
+			
  			let query2 = "DELETE FROM orders WHERE order_id = ?";
 			var keyword = req.body.order_id;
 
 
- 			db.pool.query(query2, keyword, function(keyword, rows, fields)
+ 			db.pool.query(query2, keyword, function(error, rows, fields)
 			{
- 				res.render('entities/orders', {data: rows});
+				if (error)
+				{
+					console.log(error);
+				}
+
+				let query2 = "SELECT * FROM orders;";
+				db.pool.query(query2, function(error, rows, fields)
+				{
+					res.render('entities/orders', {data: rows});
+				});
  			});
  		}
  	    else if(req.body.display_all != undefined)
@@ -464,13 +515,51 @@
 			});
 		}
 		else if(req.body.delete_payment != undefined){
-			var sql = `DELETE FROM payments WHERE payment_id = ?`
+
+			var sql1 = `DELETE FROM order_details WHERE order_id = (SELECT order_id FROM orders WHERE payment_id = ?);`
 			var values = parseInt(req.body.payment_id)
 
-			db.pool.query(sql, values, function(error, rows, fields)
-		   {
+			db.pool.query(sql1, values, function(error, rows, fields)
+		    {
 			   if (error)
 			   {
+				   console.log(error)
+			   }
+
+			   let query2 = "SELECT * FROM order_details;";
+			   db.pool.query(query2, function(error, rows, fields)
+			   {
+				   res.render('entities/order_details', {data: rows});
+			   });
+			});
+
+
+			var sql2 = `DELETE FROM orders WHERE payment_id = ?;`
+			var values = parseInt(req.body.payment_id)
+
+			db.pool.query(sql2, values, function(error, rows, fields)
+		    {
+			   if (error)
+			   {
+				   console.log(error)
+			   }
+
+			   let query2 = "SELECT * FROM orders;";
+			   db.pool.query(query2, function(error, rows, fields)
+			   {
+				   res.render('entities/orders', {data: rows});
+			   });
+			});
+
+			
+
+			var sql3 = `DELETE FROM payments WHERE payment_id = ?`
+			var values = parseInt(req.body.payment_id)
+
+			db.pool.query(sql3, values, function(error, rows, fields)
+		    {
+			   if (error)
+			   { 
 				   console.log(error)
 			   }
 
@@ -543,7 +632,27 @@
 		}
 		else if(req.body.delete_store != undefined)
 		{
-			console.log(typeof(req.body.store_id))
+			
+			//delete order associated with stores
+
+			var sql1 = `DELETE FROM orders WHERE store_id = ?`
+			var values = parseInt(req.body.store_id)
+ 
+			db.pool.query(sql1, values, function(error, rows, fields)
+			{
+				if (error)
+				{
+					console.log(error)
+				}
+ 
+				let query3 = "SELECT * FROM stores;";
+				db.pool.query(query3, function(error, rows, fields)
+				{ 
+					res.render('entities/stores', {data: rows});
+				});
+			});
+
+
 			var sql = `DELETE FROM stores WHERE store_id = ?`
 			var values = parseInt(req.body.store_id)
  
